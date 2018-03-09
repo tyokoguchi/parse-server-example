@@ -4,7 +4,7 @@
 var express = require('express');
 var ParseServer = require('parse-server').ParseServer;
 var path = require('path');
-
+const resolve = require('path').resolve;
 var databaseUri = 'mongodb://ccecere12:7ig2bmv1a@ds025399.mlab.com:25399/cafecura';
 
 if (!databaseUri) {
@@ -12,15 +12,48 @@ if (!databaseUri) {
 }
 
 var api = new ParseServer({
-  databaseURI: databaseUri || 'mongodb://localhost:27017/dev',
+  databaseURI: process.env.DATABASE_URI || process.env.MONGOLAB_IVORY_URI,
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
-  appId: process.env.APP_ID || '2np9unq9n23baoasijdn2',
-  masterKey: process.env.MASTER_KEY || 'p12u4hrufnqci34j3084n1p2nq1', //Add your master key here. Keep it secret!
-  serverURL: process.env.SERVER_URL || 'https://cafecura.herokuapp.com/',  // Don't forget to change to https if needed
-  liveQuery: {
-    classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
+  appId: process.env.APP_ID || 'wen12398nvoenp20fn20f',
+  clientKey: process.env.CLIENT_KEY || '2m30amsq1p49fnq204qj', 
+  masterKey: process.env.MASTER_KEY || '28doqnt9qnsoqwnie02a',
+  serverURL: process.env.SERVER_URL || 'https://cafecura.herokuapp.com/',
+  appName : 'cafecura',
+  verifyUserEmails: true,
+  emailVerifyTokenValidityDuration: 2 * 60 * 60, // in seconds (2 hours = 7200 seconds)
+  preventLoginWithUnverifiedEmail: true,
+  publicServerURL: 'https://cafecura.herokuapp.com/',
+  emailAdapter: {
+    module: '@parse/simple-mailgun-adapter',
+    options: {
+      fromAddress: 'cafe@cafecura.com',
+      domain: 'mg.cafecura.com',
+      apiKey: 'key-9456e7cec1f176dfc7bf3c7f98116f73',
+templates: {
+        passwordResetEmail: {
+          subject: 'Reset your password',
+          pathPlainText: resolve(__dirname, 'path/to/templates/password_reset_email.txt'),
+          pathHtml: resolve(__dirname, 'path/to/templates/password_reset_email.html'),
+          callback: (user) => { return { firstName: user.get('firstName') }}
+          // Now you can use {{firstName}} in your templates
+        },
+        verificationEmail: {
+          subject: 'Confirm your account',
+          pathPlainText: resolve(__dirname, 'path/to/templates/verification_email.txt'),
+          pathHtml: resolve(__dirname, 'path/to/templates/verification_email.html'),
+          callback: (user) => { return { firstName: user.get('firstName') }}
+          // Now you can use {{firstName}} in your templates
+        },
+        customEmailAlert: {
+          subject: 'Urgent notification!',
+          pathPlainText: resolve(__dirname, 'path/to/templates/custom_alert.txt'),
+          pathHtml: resolve(__dirname, 'path/to/templates/custom_alert.html'),
+        }
+      }
+    }
   }
 });
+
 // Client-keys like the javascript key or the .NET key are not necessary with parse-server
 // If you wish you require them, you can set them as options in the initialization above:
 // javascriptKey, restAPIKey, dotNetKey, clientKey
