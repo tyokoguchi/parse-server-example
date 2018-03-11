@@ -17,40 +17,40 @@ var api = new ParseServer({
   appId: process.env.APP_ID || 'wen12398nvoenp20fn20f',
   masterKey: process.env.MASTER_KEY || '28doqnt9qnsoqwnie02a',
   serverURL: process.env.SERVER_URL || 'https://cafecura.herokuapp.com/',
-  //appName : 'cafecura',
-  //verifyUserEmails: true,
-  //emailVerifyTokenValidityDuration: 2 * 60 * 60, // in seconds (2 hours = 7200 seconds)
-  //preventLoginWithUnverifiedEmail: true,
-  //publicServerURL: 'https://cafecura.herokuapp.com/',
-  //emailAdapter: {
-  //  module: '@parse/simple-mailgun-adapter',
-  //  options: {
-  //    fromAddress: 'cafe@cafecura.com',
-  //    domain: 'mg.cafecura.com',
-  //    apiKey: 'key-9456e7cec1f176dfc7bf3c7f98116f73',
-//templates: {
-  //      passwordResetEmail: {
-  //        subject: 'Reset your password',
-  //        pathPlainText: resolve(__dirname, 'path/to/templates/password_reset_email.txt'),
-  //        pathHtml: resolve(__dirname, 'path/to/templates/password_reset_email.html'),
-  //        callback: (user) => { return { firstName: user.get('firstName') }}
+  appName : 'cafecura',
+  verifyUserEmails: true,
+  emailVerifyTokenValidityDuration: 2 * 60 * 60, // in seconds (2 hours = 7200 seconds)
+  preventLoginWithUnverifiedEmail: true,
+  publicServerURL: 'https://cafecura.herokuapp.com/',
+  emailAdapter: {
+    module: '@parse/simple-mailgun-adapter',
+    options: {
+      fromAddress: 'cafe@cafecura.com',
+      domain: 'mg.cafecura.com',
+      apiKey: 'key-9456e7cec1f176dfc7bf3c7f98116f73',
+templates: {
+        passwordResetEmail: {
+          subject: 'Reset your password',
+          pathPlainText: resolve(__dirname, 'path/to/templates/password_reset_email.txt'),
+          pathHtml: resolve(__dirname, 'path/to/templates/password_reset_email.html'),
+          callback: (user) => { return { firstName: user.get('firstName') }}
           // Now you can use {{firstName}} in your templates
-  //      },
-  //      verificationEmail: {
-  //        subject: 'Confirm your account',
-  //        pathPlainText: resolve(__dirname, 'path/to/templates/verification_email.txt'),
-  //        pathHtml: resolve(__dirname, 'path/to/templates/verification_email.html'),
-  //        callback: (user) => { return { firstName: user.get('firstName') }}
+        },
+        verificationEmail: {
+          subject: 'Confirm your account',
+          pathPlainText: resolve(__dirname, 'path/to/templates/verification_email.txt'),
+          pathHtml: resolve(__dirname, 'path/to/templates/verification_email.html'),
+          callback: (user) => { return { firstName: user.get('firstName') }}
           // Now you can use {{firstName}} in your templates
-  //      },
-  //      customEmailAlert: {
-  //        subject: 'Urgent notification!',
-  //        pathPlainText: resolve(__dirname, 'path/to/templates/custom_alert.txt'),
-  //        pathHtml: resolve(__dirname, 'path/to/templates/custom_alert.html'),
-  //      }
-  //    }
-  //  }
-  //}
+        },
+        customEmailAlert: {
+          subject: 'Urgent notification!',
+          pathPlainText: resolve(__dirname, 'path/to/templates/custom_alert.txt'),
+          pathHtml: resolve(__dirname, 'path/to/templates/custom_alert.html'),
+        }
+      }
+    }
+  },
   liveQuery: {
     classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
   }
