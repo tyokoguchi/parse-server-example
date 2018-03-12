@@ -14,7 +14,7 @@ if (!databaseUri) {
 var api = new ParseServer({
   databaseURI: databaseUri || 'mongodb://localhost:27017/dev',
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
-  appId: process.env.APP_ID || 'wen12398nvoenp20fn20f',
+  appId: process.env.APP_ID || 'cafecura',
   masterKey: process.env.MASTER_KEY || '28doqnt9qnsoqwnie02a',
   serverURL: process.env.SERVER_URL || 'https://cafecura.herokuapp.com/',
   appName : 'cafecura',
