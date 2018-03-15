@@ -21,7 +21,7 @@ var api = new ParseServer({
   verifyUserEmails: true,
   emailVerifyTokenValidityDuration: 2 * 60 * 60, // in seconds (2 hours = 7200 seconds)
   preventLoginWithUnverifiedEmail: true,
-  publicServerURL: 'https://cafecura.herokuapp.com/',
+  publicServerURL: 'https://cafecura.herokuapp.com/parse',
   emailAdapter: {
     module: '@parse/simple-mailgun-adapter',
     options: {
