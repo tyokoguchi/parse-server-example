@@ -16,12 +16,12 @@ var api = new ParseServer({
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
   appId: process.env.APP_ID || 'cafecura',
   masterKey: process.env.MASTER_KEY || '28doqnt9qnsoqwnie02a',
-  serverURL: process.env.SERVER_URL || 'https://cafecura.herokuapp.com',
+  serverURL: process.env.SERVER_URL || 'https://cafecura.herokuapp.com/parse',
   appName : 'cafecura',
   verifyUserEmails: true,
   emailVerifyTokenValidityDuration: 2 * 60 * 60, // in seconds (2 hours = 7200 seconds)
   preventLoginWithUnverifiedEmail: true,
-  publicServerURL: 'https://cafecura.herokuapp.com',
+  publicServerURL: 'https://cafecura.herokuapp.com/parse',
   emailAdapter: {
     module: '@parse/simple-mailgun-adapter',
     options: {
